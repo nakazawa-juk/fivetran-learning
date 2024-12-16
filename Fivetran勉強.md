@@ -1,7 +1,6 @@
 # Fivetran の勉強メモ
 
-案件で Fivetran を使う予定なのでキャッチアップしておきたい。<br>
-作業中、記録したいと思ったことをここにメモする。
+Fivetran という、イケてるサービスがあり、興味が湧いたので勉強してみたい。
 
 ## 知見
 
@@ -40,9 +39,9 @@ password:
 
 1. ダッシュボード左下の「API Key」を選択
 2. 「Generate new secrete」を選択  
-   API Key: B27zjJv9FKoWnegi
-   API Secret: jnsoascLcUzDBUDkUW60uGg8pD1edvoc
-   Base64-encoded API key: QjI3empKdjlGS29XbmVnaTpqbnNvYXNjTGNVekRCVURrVVc2MHVHZzhwRDFlZHZvYw==
+   API Key: xxxx
+   API Secret: yyyy
+   Base64-encoded API key: zzzz
 3. API Key を API リクエストに含めて使う。
 
 ### ■ 知見 ② Fivetran API でユーザー情報を取得する
@@ -52,7 +51,7 @@ distination に設定した postgres に挿入されたユーザー情報を、F
 1. curl で API を叩く
 
 ```
-curl -X GET "https://api.fivetran.com/v1/users" -u B27zjJv9FKoWnegi:jnsoascLcUzDBUDkUW60uGg8pD1edvoc | jq
+curl -X GET "https://api.fivetran.com/v1/users" -u <API Key>:<API Secret> | jq
 ```
 
 レスポンス ↓
@@ -67,13 +66,13 @@ curl -X GET "https://api.fivetran.com/v1/users" -u B27zjJv9FKoWnegi:jnsoascLcUzD
     "items": [
       {
         "id": "forty_unanimous",
-        "email": "nakajuki6045@gmail.com",
+        "email": "dummy@example.com",
         "given_name": "Jukiya",
         "family_name": "Nakazawa",
         "verified": true,
         "invited": false,
         "picture": null,
-        "phone": "07085100706",
+        "phone": "00000000000",
         "role": "Account Administrator",
         "logged_in_at": "2024-10-17T04:39:00.389Z",
         "created_at": "2024-10-17T04:38:27.369689Z",
@@ -97,8 +96,8 @@ curl -X GET "https://api.fivetran.com/v1/users" -u B27zjJv9FKoWnegi:jnsoascLcUzD
 
 ```
 # FivetranのAPIキーとシークレットを設定
-API_KEY="B27zjJv9FKoWnegi"
-API_SECRET_KEY="jnsoascLcUzDBUDkUW60uGg8pD1edvoc"
+API_KEY="xxxx"
+API_SECRET_KEY="yyyy"
 
 # APIエンドポイント
 URL="https://api.fivetran.com/v1/connectors"
@@ -112,11 +111,11 @@ BODY='{
   	},
     "auth": {
         "client_access": {
-            "client_id": "4152769596-den4paj21oq7r72ccs9gioh7eb1pinq9.apps.googleusercontent.com",
-            "client_secret": "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"
+            "client_id": "xxxx.apps.googleusercontent.com",
+            "client_secret": "xxxx"
         },
-        "refresh_token": "1//0eebM6P09H_UhCgYIARAAGA4SNwF-L9IrHws_9f3mipaIU2c43uHjaLzA7neee5M4Cs9Pug6kkUbX1Q4YyiOiW_jNX9KKdHZz-3c",
-        "access_token": "ya29.a0AcM612x58UFuDqxk26_7u-lOunAhn4ss5cj9J3xU7qIqNaQPCu7xqaIPlUfYngO1_yk8I5e-2TBLuKYxUFiMuchYKCMbH7wtHSJcP_0zqIEWyhh9tvgSON_e-ijsMF25iX1JILNXIiNhz8T0A3pFeqpBmrfAd-uQhIR4EU9BaCgYKAQYSARASFQHGX2MiJur7x5cBCaPMuVCrUwuMqA0175"
+        "refresh_token": "xxxx",
+        "access_token": "xxxx"
     }
 }'
 
@@ -268,4 +267,3 @@ Google OAuth 情報（`client_id`, `client_secret`, `refresh_token`, `access_tok
 
 - 取得した `client_id`, `client_secret`, `refresh_token`, `access_token` を Fivetran のリクエストボディに入力します。
 
-これで Google OAuth 情報を準備する手順は完了です！Fivetran でのデータ同期に必要な認証情報が揃いました。
